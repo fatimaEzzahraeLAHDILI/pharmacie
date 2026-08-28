@@ -1,0 +1,7 @@
+{
+  "buildCommand": "npm --prefix pharmacy-frontend run build",
+  "outputDirectory": "pharmacy-frontend/dist",
+  "rewrites": [
+    { "source": "/(.*)", "destination": "/index.html" }
+  ]
+}
