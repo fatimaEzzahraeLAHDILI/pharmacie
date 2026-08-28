@@ -1,5 +1,6 @@
 {
-  "buildCommand": "npm --prefix pharmacy-frontend run build",
+  "installCommand": "cd pharmacy-frontend && npm install",
+  "buildCommand": "cd pharmacy-frontend && npm run build",
   "outputDirectory": "pharmacy-frontend/dist",
   "rewrites": [
     { "source": "/(.*)", "destination": "/index.html" }
