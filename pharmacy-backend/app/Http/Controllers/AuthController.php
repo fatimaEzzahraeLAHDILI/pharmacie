@@ -86,7 +86,7 @@ class AuthController extends Controller
 
         if ($user->hasVerifiedEmail()) {
             // Redirect to frontend home page
-            return redirect('http://localhost:5173?verified=1');
+            return redirect(rtrim(env('FRONTEND_URL', 'http://localhost:5173'), '/') . '?verified=1');
         }
 
         if ($user->markEmailAsVerified()) {
@@ -94,7 +94,7 @@ class AuthController extends Controller
         }
 
         // Redirect to frontend home page
-        return redirect('http://localhost:5173?verified=1');
+        return redirect(rtrim(env('FRONTEND_URL', 'http://localhost:5173'), '/') . '?verified=1');
     }
 
     // 4. Resend Verification Email
