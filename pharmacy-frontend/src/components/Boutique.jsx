@@ -1,13 +1,13 @@
 ﻿import React, { useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
+import api, { apiBaseUrl } from '../lib/api';
 
 const getImageUrl = (image) => {
   if (!image) return null;
   const cleanImage = String(image).replace(/^\/+/, '');
   if (cleanImage.startsWith('http')) return cleanImage;
-  if (cleanImage.startsWith('uploads/')) return `http://127.0.0.1:8091/${cleanImage}`;
-  return `http://127.0.0.1:8091/assets/${cleanImage}`;
+  if (cleanImage.startsWith('uploads/')) return `${apiBaseUrl}/${cleanImage}`;
+  return `${apiBaseUrl}/assets/${cleanImage}`;
 };
 
 const Boutique = ({ medicines }) => {
@@ -58,7 +58,7 @@ const Boutique = ({ medicines }) => {
     payload.append('ordonnance', file);
     try {
       setIsUploadingOrdonnance(true);
-      const res = await axios.post('/api/ordonnances/upload', payload, {
+      const res = await api.post('/api/ordonnances/upload', payload, {
         headers: { 'Content-Type': 'multipart/form-data' },
       });
       setOrdonnanceUrl(res.data?.url || '');

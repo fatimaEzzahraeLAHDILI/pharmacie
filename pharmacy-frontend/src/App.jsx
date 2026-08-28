@@ -1,6 +1,5 @@
 import { BrowserRouter as Router, Routes, Route, Link, Navigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import axios from 'axios';
 
 import Home from './components/Home';
 import Boutique from './components/Boutique';
@@ -9,13 +8,7 @@ import Register from './components/Register';
 import AdminProducts from './components/AdminProducts';
 import AdminUsers from './components/AdminUsers';
 import ProductDetails from './components/ProductDetails';
-
-axios.defaults.baseURL = import.meta.env.VITE_API_URL || 'http://127.0.0.1:8091';
-axios.interceptors.request.use((config) => {
-  const token = localStorage.getItem('auth_token');
-  if (token) config.headers.Authorization = `Bearer ${token}`;
-  return config;
-});
+import api from './lib/api';
 
 function App() {
   const [medicines, setMedicines] = useState([]);
@@ -23,7 +16,7 @@ function App() {
   const [isAdmin, setIsAdmin] = useState(localStorage.getItem('isAdmin') === 'true');
 
   useEffect(() => {
-    axios.get('/api/products')
+    api.get('/api/products')
       .then(res => setMedicines(res.data))
       .catch(err => console.log("Erreur API:", err));
   }, []);

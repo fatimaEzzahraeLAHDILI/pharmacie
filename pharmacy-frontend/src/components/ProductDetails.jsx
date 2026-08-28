@@ -1,3 +1,4 @@
+import { apiBaseUrl } from '../lib/api';
 import React from 'react';
 import { Link, Navigate, useParams } from 'react-router-dom';
 
@@ -5,8 +6,8 @@ const getImageUrl = (image) => {
   if (!image) return null;
   const cleanImage = String(image).replace(/^\/+/, '');
   if (cleanImage.startsWith('http')) return cleanImage;
-  if (cleanImage.startsWith('uploads/')) return `http://127.0.0.1:8091/${cleanImage}`;
-  return `http://127.0.0.1:8091/assets/${cleanImage}`;
+  if (cleanImage.startsWith('uploads/')) return `${apiBaseUrl}/${cleanImage}`;
+  return `${apiBaseUrl}/assets/${cleanImage}`;
 };
 
 const extractDosage = (medicine) => {

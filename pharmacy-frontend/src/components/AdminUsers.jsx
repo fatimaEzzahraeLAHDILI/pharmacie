@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import api from '../lib/api';
 
 const ADMIN_EMAIL = 'fatimaishrak1@gmail.com';
 
@@ -13,7 +13,7 @@ const AdminUsers = () => {
   const fetchUsers = async () => {
     setLoading(true);
     try {
-      const res = await axios.get('/api/users');
+      const res = await api.get('/api/users');
       setUsers(res.data || []);
     } catch (err) {
       console.error(err);
@@ -38,7 +38,7 @@ const AdminUsers = () => {
 
   const handleSave = async (id) => {
     try {
-      await axios.put(`/api/users/${id}`, formData);
+      await api.put(`/api/users/${id}`, formData);
       setEditingId(null);
       fetchUsers();
     } catch (err) {
@@ -56,7 +56,7 @@ const AdminUsers = () => {
     if (!window.confirm(`Supprimer ${user.name} ?`)) return;
 
     try {
-      await axios.delete(`/api/users/${user.id}`);
+      await api.delete(`/api/users/${user.id}`);
       fetchUsers();
     } catch (err) {
       console.error(err);

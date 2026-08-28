@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import axios from 'axios';
+import api from '../lib/api';
 
 const AdminProducts = () => {
     const [products, setProducts] = useState([]);
@@ -13,7 +13,7 @@ const AdminProducts = () => {
     
 
     const fetchProducts = () => {
-        axios.get('/api/products').then(res => setProducts(res.data));
+        api.get('/api/products').then(res => setProducts(res.data));
     };
 useEffect(() => { fetchProducts(); }, []);
     const handleAddProduct = (e) => {
@@ -25,7 +25,7 @@ useEffect(() => { fetchProducts(); }, []);
         payload.append('dosage', newProduct.dosage);
         payload.append('forme', newProduct.forme);
         if (newProduct.image) payload.append('image', newProduct.image);
-        axios.post('/api/products', payload, {
+        api.post('/api/products', payload, {
             headers: { 'Content-Type': 'multipart/form-data' },
         }).then(() => {
             fetchProducts();
@@ -40,7 +40,7 @@ useEffect(() => { fetchProducts(); }, []);
 
     const handleDelete = (id) => {
         if (window.confirm('Confirmer la suppression de ce médicament ? 🗑️')) {
-            axios.delete(`/api/products/${id}`).then(() => fetchProducts());
+            api.delete(`/api/products/${id}`).then(() => fetchProducts());
         }
     };
 
@@ -50,7 +50,7 @@ useEffect(() => { fetchProducts(); }, []);
     };
 
     const handleSave = (id) => {
-        axios.put(`/api/products/${id}`, formData).then(() => {
+        api.put(`/api/products/${id}`, formData).then(() => {
             setEditingId(null);
             fetchProducts();
         });
