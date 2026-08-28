@@ -1,0 +1,25 @@
+# Laravel
+pharmacy-backend/.env
+pharmacy-backend/.env.*
+!pharmacy-backend/.env.example
+pharmacy-backend/vendor/
+pharmacy-backend/storage/app/public/
+pharmacy-backend/storage/framework/cache/data/
+pharmacy-backend/storage/framework/sessions/
+pharmacy-backend/storage/framework/testing/
+pharmacy-backend/storage/framework/views/
+pharmacy-backend/storage/logs/*.log
+pharmacy-backend/public/storage
+pharmacy-backend/public/uploads/
+
+# Frontend
+pharmacy-frontend/node_modules/
+pharmacy-frontend/dist/
+pharmacy-frontend/.env
+pharmacy-frontend/.env.*
+!pharmacy-frontend/.env.example
+
+# Editors and OS
+.vscode/
+.DS_Store
+Thumbs.db
