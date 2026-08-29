@@ -24,7 +24,13 @@ const Register = () => {
       setMessage("Inscription réussie ! Redirection...");
       setTimeout(() => navigate('/'), 3000);
     } catch (err) {
-      setError(err.response?.data?.message || "Une erreur est survenue lors de l'inscription.");
+      if (!err.response) {
+        setError("Le serveur est inaccessible. Configurez VITE_API_URL avec l'URL publique du backend Laravel.");
+      } else if (err.response.status === 422 && err.response.data?.errors) {
+        setError(Object.values(err.response.data.errors).flat().join(' '));
+      } else {
+        setError(err.response.data?.message || "Une erreur est survenue lors de l'inscription.");
+      }
     } finally {
       setLoading(false);
     }

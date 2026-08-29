@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Events\Verified;
-use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
+use Throwable;
 
 class AuthController extends Controller
 {
@@ -31,7 +31,7 @@ class AuthController extends Controller
 
         try {
             event(new Registered($user));
-        } catch (TransportExceptionInterface $exception) {
+        } catch (Throwable $exception) {
             report($exception);
             $user->delete();
 
